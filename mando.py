@@ -11,11 +11,11 @@ class Mando(gameObj):
         self.y = 5
         self.width = 3
         self.height = 3
-        self.vel = np.array([0,0])
-        self.acc = np.array([0,0])
+        self.vel = np.array([0,0],dtype='float64')
+        self.acc = np.array([0,0.15],dtype='float64')
 
     def printMando(self, s):
-        for i in range(3):
-            for j in range(3):
-                s.display[self.y+i, self.x+j] = self.img[i, j]
+        for i in range(self.height):
+            for j in range(self.width):
+                s.display[int(self.y+i), int(self.x+j)] = self.img[i, j]
 

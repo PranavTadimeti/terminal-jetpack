@@ -9,8 +9,8 @@ class gameObj:
         self.img = []
         self.width = 0
         self.height = 0
-        self.vel = np.array([0,0])
-        self.acc = np.array([0,0])
+        self.vel = np.array([0.0,0.0])
+        self.acc = np.array([0.0,0.0])
 
     def getX(self):
         return self.x

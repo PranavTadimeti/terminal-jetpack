@@ -52,7 +52,6 @@ while(True):
 
         elif(inp == 'w'):
             flying = 1
-            m.acc[1] = 0
             m.changeYVel(-1)
             m.changeXVel(0)
 
@@ -66,15 +65,13 @@ while(True):
         elif(inp == 'd'):            
             m.changeXVel(1)
         
-        #Updating mando's properties
-
-        m.changeX(m.getX()+m.getXVel(),d)
-        m.changeY(m.getY()+m.getYVel(),d)
+        m.changeX(m.getX()+int(m.getXVel()),d)
 
     if(not flying):
-        m.acc[1] = 1
         m.changeYVel(m.getYVel()+m.acc[1])
-        m.changeY(m.getY()+m.getYVel(),d)
+        # m.changeY(m.getY()+m.getYVel(),d)
+    
+    m.changeY(m.getY()+int(m.getYVel()),d)
         
     
-    time.sleep(0.01)
+    time.sleep(0.02)
