@@ -12,6 +12,7 @@ import time
 from alarmex import AlarmException
 from inp import getCh
 from asynch import KBHit
+from coins import *
 
 r, c = os.popen('stty size', 'r').read().split()
 r = int(r)-3
@@ -19,30 +20,38 @@ c = int(c)
 
 init()
 
-d = Screen(r, c, np.array([[' ' for i in range(c)]
-                           for j in range(r)], dtype='str'))
-d.createScreen()
+d = Screen(r, c, np.full((r, c), Back.BLUE+" "))
 
 m = Mando()
 
 kb = KBHit()
-
-cnt = 0
-beamcnt = 0
 beamsList = []
 
+b = Beams(d)
+c = Coin(d)
 
-#game loop
+# game loop
 while(True):
 
     flying = 0
 
     y = m.getY()
     x = m.getX()
+    
+    d.createScreen()
+
+    b.changeX(b.getX()+b.getXVel(), d)
+    c.changeX(c.getX()+c.getXVel(),d)
+
+    b.printBeam()
+    b.checkEdge()
+
+    c.printCoin()
+    c.checkEdge()
 
     m.printMando(d)
     d.printScreen()
-    
+
     if kb.kbhit():
 
         inp = kb.getch()
@@ -62,16 +71,16 @@ while(True):
         elif(inp == 'a'):
             m.changeXVel(-1)
 
-        elif(inp == 'd'):            
+        elif(inp == 'd'):
             m.changeXVel(1)
-        
-        m.changeX(m.getX()+int(m.getXVel()),d)
+
+        m.changeX(m.getX()+int(m.getXVel()), d)
 
     if(not flying):
-        m.changeYVel(m.getYVel()+m.acc[1])
-        # m.changeY(m.getY()+m.getYVel(),d)
-    
-    m.changeY(m.getY()+int(m.getYVel()),d)
-        
-    
+
+        if(m.getYVel() <= 2):
+            m.changeYVel(m.getYVel()+m.acc[1])
+
+    m.changeY(m.getY()+int(m.getYVel()), d)
+
     time.sleep(0.02)
