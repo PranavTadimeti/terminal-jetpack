@@ -9,6 +9,7 @@ class Screen:
         self.display = display
         self.wdt = wdt
         self.ht = ht
+        self.gnd = int((self.ht*4)/5)
 
     def createScreen(self):
         self.display[:] = ' '
@@ -18,9 +19,9 @@ class Screen:
         print(Back.BLUE)
         s = ''.join(str(c) for l in self.display for c in l)
 
-        print(s[0:(self.ht-10)*self.wdt], end="\r")
+        print(s[0:self.gnd*self.wdt], end="\r")
 
         print(Back.GREEN)
-        print(s[(self.ht-10)*self.wdt:(self.ht*self.wdt)], end="\r")
+        print(s[self.gnd*self.wdt:(self.ht*self.wdt)], end="\r")
 
         print("\033[0;0H")

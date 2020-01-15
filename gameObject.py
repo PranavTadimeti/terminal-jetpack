@@ -9,6 +9,8 @@ class gameObj:
         self.img = []
         self.width = 0
         self.height = 0
+        self.vel = np.array([0,0])
+        self.acc = np.array([0,0])
 
     def getX(self):
         return self.x
@@ -16,6 +18,17 @@ class gameObj:
     def getY(self):
         return self.y
 
+    def getXVel(self):
+        return self.vel[0]
+    
+    def getYVel(self):
+        return self.vel[1]
+    
+    def changeXVel(self,newv):
+        self.vel[0] = newv
+    
+    def changeYVel(self,newv):
+        self.vel[1] = newv
 
     def changeX(self, new_x, s):
 
@@ -39,7 +52,7 @@ class gameObj:
                 s.display[self.y+i, self.x+j] = ' '
 
 
-        if(new_y > s.ht-13):
-            new_y = s.ht-13
+        if(new_y > s.gnd-3):
+            new_y = s.gnd-3
         
         self.y = new_y

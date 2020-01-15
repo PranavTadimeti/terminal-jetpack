@@ -25,37 +25,14 @@ d.createScreen()
 
 m = Mando()
 
-"""
-def move():
-    def alarmhandler(signum, frame):
-        ''' input method '''
-        raise AlarmException
-
-    def user_input(timeout=0.15):
-        ''' input method '''
-        signal.signal(signal.SIGALRM, alarmhandler)
-        signal.setitimer(signal.ITIMER_REAL, timeout)
-
-        try:
-            text = getCh()()
-            signal.alarm(0)
-            return text
-        except AlarmException:
-            pass
-        signal.signal(signal.SIGALRM, signal.SIG_IGN)
-        return ''
-
-    ch = user_input()
-
-    return ch
-"""
-
 kb = KBHit()
 
 cnt = 0
 beamcnt = 0
 beamsList = []
 
+
+#game loop
 while(True):
 
     flying = 0
@@ -65,7 +42,7 @@ while(True):
 
     m.printMando(d)
     d.printScreen()
-
+    
     if kb.kbhit():
 
         inp = kb.getch()
@@ -75,22 +52,29 @@ while(True):
 
         elif(inp == 'w'):
             flying = 1
-            cnt = 0
-            m.changeY(y-2, d)
+            m.acc[1] = 0
+            m.changeYVel(-1)
+            m.changeXVel(0)
 
         elif(inp == 's'):
-            m.changeY(y+2, d)
+            m.changeYVel(1)
+            m.changeXVel(0)
 
         elif(inp == 'a'):
-            m.changeX(x-1, d)
+            m.changeXVel(-1)
 
-        elif(inp == 'd'):
-            m.changeX(x+1, d)
+        elif(inp == 'd'):            
+            m.changeXVel(1)
+        
+        #Updating mando's properties
 
-    # inp = move()
+        m.changeX(m.getX()+m.getXVel(),d)
+        m.changeY(m.getY()+m.getYVel(),d)
 
     if(not flying):
-        cnt += 1
-        m.changeY(int(y+cnt), d)
-
+        m.acc[1] = 1
+        m.changeYVel(m.getYVel()+m.acc[1])
+        m.changeY(m.getY()+m.getYVel(),d)
+        
+    
     time.sleep(0.01)

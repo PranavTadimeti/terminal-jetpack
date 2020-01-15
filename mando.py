@@ -11,6 +11,8 @@ class Mando(gameObj):
         self.y = 5
         self.width = 3
         self.height = 3
+        self.vel = np.array([0,0])
+        self.acc = np.array([0,0])
 
     def printMando(self, s):
         for i in range(3):
