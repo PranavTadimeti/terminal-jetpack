@@ -5,11 +5,13 @@ import sys
 from screen import *
 from mando import *
 from gameObject import *
+from beams import *
 import os
 import signal
 import time
 from alarmex import AlarmException
 from inp import getCh
+from asynch import KBHit
 
 r, c = os.popen('stty size', 'r').read().split()
 r = int(r)-3
@@ -23,7 +25,7 @@ d.createScreen()
 
 m = Mando()
 
-
+"""
 def move():
     def alarmhandler(signum, frame):
         ''' input method '''
@@ -46,38 +48,49 @@ def move():
     ch = user_input()
 
     return ch
+"""
 
+kb = KBHit()
 
-cnt = time.time()
+cnt = 0
+beamcnt = 0
+beamsList = []
 
 while(True):
 
     flying = 0
 
-    m.printMando(d)
-    d.printScreen()
-
-    inp = move()
-
     y = m.getY()
     x = m.getX()
 
-    if(inp == 'w'):
-        flying = 1
-        m.changeY(y-2, d)
-        cnt = time.time()
+    m.printMando(d)
+    d.printScreen()
 
-    elif(inp == 's'):
-        m.changeY(y+2, d)
+    if kb.kbhit():
 
-    elif(inp == 'a'):
-        m.changeX(x-1, d)
+        inp = kb.getch()
 
-    elif(inp == 'd'):
-        m.changeX(x+1, d)
+        if(ord(inp) == 27):
+            break
 
-    elif(inp == 'q'):
-        sys.exit(0)
+        elif(inp == 'w'):
+            flying = 1
+            cnt = 0
+            m.changeY(y-2, d)
+
+        elif(inp == 's'):
+            m.changeY(y+2, d)
+
+        elif(inp == 'a'):
+            m.changeX(x-1, d)
+
+        elif(inp == 'd'):
+            m.changeX(x+1, d)
+
+    # inp = move()
 
     if(not flying):
-        m.changeY(int(y+(time.time()/cnt)), d)
+        cnt += 1
+        m.changeY(int(y+cnt), d)
+
+    time.sleep(0.01)

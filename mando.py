@@ -1,14 +1,16 @@
 from screen import *
 from colorama import *
 import numpy as np
-import gameObject
+from gameObject import *
 
 
-class Mando(gameObject.gameObj):
+class Mando(gameObj):
     def __init__(self):
         self.img = np.array([[' ', ' ', 'O'], ['[', ']', '|'], [' ', ' ', 'L']], dtype='str')
         self.x = 5
         self.y = 5
+        self.width = 3
+        self.height = 3
 
     def printMando(self, s):
         for i in range(3):
