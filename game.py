@@ -27,8 +27,7 @@ m = Mando()
 kb = KBHit()
 
 objList = []
-bcnt = 0
-ccnt = 0
+cnt = 0
 ind = 0
 
 # game loop
@@ -40,21 +39,28 @@ while(True):
     
     d.createScreen()
 
-    if(bcnt%60 == 0):
+    if(cnt%60 == 0):
         t = Beams(d,ind)
         objList.append(t)
         t.pickType()
         ind += 1
+    
+    if(cnt%100 == 0):
+        
+        for i in range(6):
+            objList.append(Coin(d,ind))
+            ind += 1
+        
+        for j in range(ind-5,ind):
+            
+            if(ind-6 >= 0):
+                objList[j].changeX(objList[ind-6].getX()+(j-ind+6),d)
+                objList[j].changeY(objList[ind-6].getY(),d)
 
-    if(ccnt%100 == 0):
-        objList.append(Coin(d,ind))
-        ind += 1
     
     for j in objList:
         j.printObject(d)
         j.changeX(j.getX()+j.getXVel(),d)
-
-
 
     m.printObject(d)
     d.printScreen()
@@ -68,7 +74,7 @@ while(True):
 
         elif(inp == 'w'):
             flying = 1
-            m.changeYVel(-1)
+            m.changeYVel(-1.25)
             m.changeXVel(0)
 
         elif(inp == 's'):
@@ -90,13 +96,12 @@ while(True):
 
     m.changeY(m.getY()+int(m.getYVel()), d)
 
-    bcnt += 1
-    ccnt += 1
+    cnt += 1
 
     for j in objList:
-        j.removeObj(objList)
+        ind = j.removeObj(objList,ind)
     
-    m.checkCollision(objList)
+    ind = m.checkCollision(objList,ind)
 
     m.checkAlive()
 

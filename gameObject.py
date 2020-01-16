@@ -56,6 +56,9 @@ class gameObj:
             for j in range(self.width):
                 s.display[self.y+i, self.x+j] = self.img[i, j]
 
-    def removeObj(self,objList):
+    def removeObj(self,objList,ind):
         if(self.x == 0):
             objList.remove(self)
+            ind -= 1
+
+        return ind

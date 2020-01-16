@@ -17,7 +17,7 @@ class Mando(gameObj):
         self.lives = 3
         self.score = 0
 
-    def checkCollision(self,objList):
+    def checkCollision(self,objList,ind):
 
         for o in objList:
             r1 = range(self.x,self.x+self.width+1)
@@ -31,12 +31,15 @@ class Mando(gameObj):
 
             if(s1.intersection(r2) and s2.intersection(r4)):
                 objList.remove(o)
+                ind -= 1
 
                 if(o.objType == "beam"):
                     self.lives -= 1
                 
                 elif(o.objType == "coin"):
                     self.score += 50
+        
+        return ind
     
     def checkAlive(self):
         if(self.lives == 0):
