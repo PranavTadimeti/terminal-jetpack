@@ -95,5 +95,9 @@ while(True):
 
     for j in objList:
         j.removeObj(objList)
+    
+    m.checkCollision(objList)
+
+    m.checkAlive()
 
     time.sleep(0.02)

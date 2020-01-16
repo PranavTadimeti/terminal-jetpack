@@ -12,6 +12,7 @@ class gameObj:
         self.vel = np.array([0.0, 0.0])
         self.acc = np.array([0.0, 0.0])
         self.index = index
+        self.objType = ""
 
     def getX(self):
         return self.x

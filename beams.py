@@ -14,6 +14,7 @@ class Beams(gameObj):
         self.vel = np.array([-1, 0])
         self.acc = np.array([0, 0])
         self.index = ind
+        self.objType = "beam"
     
     def pickType(self):
         i = randrange(3)

@@ -14,3 +14,31 @@ class Mando(gameObj):
         self.height = 3
         self.vel = np.array([0, 0], dtype='float64')
         self.acc = np.array([0, 0.115], dtype='float64')
+        self.lives = 3
+        self.score = 0
+
+    def checkCollision(self,objList):
+
+        for o in objList:
+            r1 = range(self.x,self.x+self.width+1)
+            r2 = range(o.x,o.x+o.width+1)
+
+            r3 = range(self.y,self.y+self.height+1)
+            r4 = range(o.y,o.y+o.height+1)
+
+            s1 = set(r1)
+            s2 = set(r3)
+
+            if(s1.intersection(r2) and s2.intersection(r4)):
+                objList.remove(o)
+
+                if(o.objType == "beam"):
+                    self.lives -= 1
+                
+                elif(o.objType == "coin"):
+                    self.score += 50
+    
+    def checkAlive(self):
+        if(self.lives == 0):
+            print(self.score)
+            sys.exit(0)
