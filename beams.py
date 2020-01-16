@@ -7,22 +7,29 @@ from colorama import *
 
 class Beams(gameObj):
 
-    def __init__(self, s):
-        self.img = np.full((1,5),Back.RED+"@")
+    def __init__(self, s,ind):
         self.s = s
         self.x = s.wdt-10
-        self.y = randrange(self.s.gnd)
-        self.width = 5
-        self.height = 1
+        self.y = randrange(self.s.gnd-5)
         self.vel = np.array([-1, 0])
         self.acc = np.array([0, 0])
+        self.index = ind
+    
+    def pickType(self):
+        i = randrange(3)
 
-    def printBeam(self):
-        
-        for i in range(self.height):
-            for j in range(self.width):
-                self.s.display[self.y+i,self.x+j] = self.img[i,j]
+        if(i == 0):
+            self.img = np.full((1,5),Back.RED+"@")
+            self.height = 1
+            self.width = 5
+        elif(i == 1):
+            self.img = np.array([[Back.RED+'@',Back.BLUE+" ",Back.BLUE+" ",Back.BLUE+" ",Back.BLUE+" "],[Back.BLUE+" ",Back.RED+'@',Back.BLUE+" ",Back.BLUE+" ",Back.BLUE+" "],
+            [Back.BLUE+" ",Back.BLUE+" ",Back.RED+"@",Back.BLUE+" ",Back.BLUE+" "],[Back.BLUE+" ",Back.BLUE+" ",Back.BLUE+" ",Back.RED+'@',Back.BLUE+" "],
+            [Back.BLUE+" ",Back.BLUE+" ",Back.BLUE+" ",Back.BLUE+" ",Back.RED+'@']])
+            self.height = 5
+            self.width = 5
+        else:
+            self.img = np.full((5,1),Back.RED+"@")
+            self.height = 5
+            self.width = 1
 
-    def checkEdge(self):
-        if(self.x == 0):
-            self.s.display[self.y, self.x:self.x+self.width] = Back.BLUE+" "

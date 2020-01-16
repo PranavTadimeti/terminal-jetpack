@@ -12,13 +12,8 @@ class Screen:
         self.gnd = int((self.ht*4)/5)
 
     def createScreen(self):
-        self.display[:] = " "+Back.BLUE
-
-        # for i in range(self.gnd,self.ht):
-        #     for j in range(self.wdt):
-        #         self.display[i,j] = " "+Back.GREEN
-
-        self.display[self.gnd:self.ht,:] = " "+Back.GREEN
+        self.display[0:self.ht,:] = Back.BLUE+" "
+        self.display[self.gnd:self.ht,:] = Back.GREEN+" "
 
     def printScreen(self):
 

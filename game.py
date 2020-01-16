@@ -25,14 +25,14 @@ d = Screen(r, c, np.full((r, c), Back.BLUE+" "))
 m = Mando()
 
 kb = KBHit()
-beamsList = []
 
-b = Beams(d)
-c = Coin(d)
+objList = []
+bcnt = 0
+ccnt = 0
+ind = 0
 
 # game loop
 while(True):
-
     flying = 0
 
     y = m.getY()
@@ -40,16 +40,23 @@ while(True):
     
     d.createScreen()
 
-    b.changeX(b.getX()+b.getXVel(), d)
-    c.changeX(c.getX()+c.getXVel(),d)
+    if(bcnt%40 == 0):
+        t = Beams(d,ind)
+        objList.append(t)
+        t.pickType()
+        ind += 1
 
-    b.printBeam()
-    b.checkEdge()
+    if(ccnt%50 == 0):
+        objList.append(Coin(d,ind))
+        ind += 1
+    
+    for j in objList:
+        j.printObject(d)
+        j.changeX(j.getX()+j.getXVel(),d)
 
-    c.printCoin()
-    c.checkEdge()
 
-    m.printMando(d)
+
+    m.printObject(d)
     d.printScreen()
 
     if kb.kbhit():
@@ -82,5 +89,11 @@ while(True):
             m.changeYVel(m.getYVel()+m.acc[1])
 
     m.changeY(m.getY()+int(m.getYVel()), d)
+
+    bcnt += 1
+    ccnt += 1
+
+    for j in objList:
+        j.removeObj(objList)
 
     time.sleep(0.02)
