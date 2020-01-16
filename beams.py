@@ -19,13 +19,13 @@ class Beams(gameObj):
         i = randrange(3)
 
         if(i == 0):
-            self.img = np.full((1,5),Back.RED+"@")
+            self.img = np.full((1,7),Back.RED+"@")
             self.height = 1
-            self.width = 5
+            self.width = 7
         elif(i == 1):
-            self.img = np.array([[Back.RED+'@',Back.BLUE+" ",Back.BLUE+" ",Back.BLUE+" ",Back.BLUE+" "],[Back.BLUE+" ",Back.RED+'@',Back.BLUE+" ",Back.BLUE+" ",Back.BLUE+" "],
-            [Back.BLUE+" ",Back.BLUE+" ",Back.RED+"@",Back.BLUE+" ",Back.BLUE+" "],[Back.BLUE+" ",Back.BLUE+" ",Back.BLUE+" ",Back.RED+'@',Back.BLUE+" "],
-            [Back.BLUE+" ",Back.BLUE+" ",Back.BLUE+" ",Back.BLUE+" ",Back.RED+'@']])
+            self.img = np.array([[Back.RED+'@',Back.CYAN+" ",Back.CYAN+" ",Back.CYAN+" ",Back.CYAN+" "],[Back.CYAN+" ",Back.RED+'@',Back.CYAN+" ",Back.CYAN+" ",Back.CYAN+" "],
+            [Back.CYAN+" ",Back.CYAN+" ",Back.RED+"@",Back.CYAN+" ",Back.CYAN+" "],[Back.CYAN+" ",Back.CYAN+" ",Back.CYAN+" ",Back.RED+'@',Back.CYAN+" "],
+            [Back.CYAN+" ",Back.CYAN+" ",Back.CYAN+" ",Back.CYAN+" ",Back.RED+'@']])
             self.height = 5
             self.width = 5
         else:

@@ -36,20 +36,12 @@ class gameObj:
         if(new_x > s.wdt-3 or new_x < 0):
             return
 
-        # for i in range(self.height):
-        #     for j in range(self.width):
-        #         s.display[self.y+i, self.x+j] = " "+Back.BLUE
-
         self.x = new_x
 
     def changeY(self, new_y, s):
 
         if(new_y < 0):
             return
-
-        # for i in range(self.height):
-        #     for j in range(self.width):
-        #         s.display[self.y+i, self.x+j] = " "+Back.BLUE
 
         if(new_y > s.gnd-3):
             new_y = s.gnd-3

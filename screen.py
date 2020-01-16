@@ -12,7 +12,7 @@ class Screen:
         self.gnd = int((self.ht*4)/5)
 
     def createScreen(self):
-        self.display[0:self.ht,:] = Back.BLUE+" "
+        self.display[0:self.ht,:] = Back.CYAN+" "
         self.display[self.gnd:self.ht,:] = Back.GREEN+" "
 
     def printScreen(self):

@@ -40,13 +40,13 @@ while(True):
     
     d.createScreen()
 
-    if(bcnt%40 == 0):
+    if(bcnt%60 == 0):
         t = Beams(d,ind)
         objList.append(t)
         t.pickType()
         ind += 1
 
-    if(ccnt%50 == 0):
+    if(ccnt%100 == 0):
         objList.append(Coin(d,ind))
         ind += 1
     
@@ -85,7 +85,7 @@ while(True):
 
     if(not flying):
 
-        if(m.getYVel() <= 2):
+        if(m.getYVel() <= 1.75):
             m.changeYVel(m.getYVel()+m.acc[1])
 
     m.changeY(m.getY()+int(m.getYVel()), d)
