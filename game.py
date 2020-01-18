@@ -30,6 +30,7 @@ kb = KBHit()
 objList = []
 cnt = 0
 ind = 0
+flag = 0
 
 # game loop
 while(True):
@@ -86,8 +87,18 @@ while(True):
             ind += 1
 
             v.createBullet(m.x+1,m.y+1)
+        
+        elif(inp == 'f'):
+            if(flag):
+                flag = 0
+            else:
+                flag = 1
 
         m.changeX(m.getX()+int(m.getXVel()), d)
+
+    if(flag):
+        for j in objList:
+            j.changeXVel(j.getXVel()-2)
 
     for j in objList:
 
@@ -116,4 +127,4 @@ while(True):
 
     cnt += 1
 
-    time.sleep(0.02)
+    time.sleep(0.0175)
