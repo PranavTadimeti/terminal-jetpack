@@ -14,7 +14,7 @@ class Mando(gameObj):
         self.height = 3
         self.vel = np.array([0, 0], dtype='float64')
         self.acc = np.array([0, 0.115], dtype='float64')
-        self.lives = 3
+        self.lives = 3000
         self.score = 0
 
     def checkCollision(self,objList,ind):

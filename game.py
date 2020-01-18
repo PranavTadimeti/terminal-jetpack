@@ -14,7 +14,7 @@ from inp import getCh
 from asynch import KBHit
 from coins import *
 from bullets import *
-
+ 
 r, c = os.popen('stty size', 'r').read().split()
 r = int(r)-3
 c = int(c)
@@ -58,14 +58,6 @@ while(True):
                 objList[j].changeX(objList[ind-6].getX()+(j-ind+6),d)
                 objList[j].changeY(objList[ind-6].getY(),d)
 
-    
-    # for j in objList:
-    #     j.printObject(d)
-    #     j.changeX(j.getX()+j.getXVel(),d)
-
-    # m.printObject(d)
-    # d.printScreen()
-
     if kb.kbhit():
 
         inp = kb.getch()
@@ -98,11 +90,15 @@ while(True):
         m.changeX(m.getX()+int(m.getXVel()), d)
 
     for j in objList:
-        j.printObject(d)
-        j.changeX(j.getX()+j.getXVel(),d)
 
-    m.printObject(d)
-    d.printScreen()
+        if(j.objType == "bullet"):
+            ind = j.checkCollision(objList,ind)
+        
+        j.changeX(j.getX()+j.getXVel(),d)
+        ind = j.removeObj(objList,ind,d)
+        
+    for j in objList:
+        j.printObject(d)
 
     if(not flying):
 
@@ -111,13 +107,13 @@ while(True):
 
     m.changeY(m.getY()+int(m.getYVel()), d)
 
-    cnt += 1
-
-    for j in objList:
-        ind = j.removeObj(objList,ind,d)
-    
     ind = m.checkCollision(objList,ind)
 
     m.checkAlive()
+
+    m.printObject(d)
+    d.printScreen()
+
+    cnt += 1
 
     time.sleep(0.02)

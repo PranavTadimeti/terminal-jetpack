@@ -15,7 +15,7 @@ class gameObj:
         self.objType = ""
 
     def getX(self):
-        return self.x
+        return self.x 
 
     def getY(self):
         return self.y
