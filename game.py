@@ -71,7 +71,7 @@ while(True):
             tim = time.time()
     
     if kb.kbhit():
-
+        
         inp = kb.getch()
 
         if(ord(inp) == 27):
@@ -97,7 +97,7 @@ while(True):
             objList.append(v)
             ind += 1
 
-            v.createBullet(m.x+1,m.y+1)
+            v.createBullet(m.getX()+3,m.getY()+1)
         
         elif(inp == 'f'):
             if(flag):
@@ -117,14 +117,6 @@ while(True):
         for j in objList:
             if(j.objType != "bullet"):
                 j.changeXVel(j.getXVel()-1)
-
-    for j in objList:
-
-        if(j.objType == "bullet"):
-            ind = j.checkCollision(objList,ind)
-        
-        j.changeX(j.getX()+j.getXVel(),d)
-        ind = j.removeObj(objList,ind,d)
         
     for j in objList:
         j.printObject(d)
@@ -133,6 +125,17 @@ while(True):
 
         if(m.getYVel() <= 1.75):
             m.changeYVel(m.getYVel()+m.acc[1])
+    
+    m.printObject(d)
+    d.printScreen()
+    
+    for j in objList:
+
+        if(j.objType == "bullet"):
+            ind = j.checkCollision(objList,ind)
+        
+        j.changeX(j.getX()+j.getXVel(),d)
+        ind = j.removeObj(objList,ind,d)
 
     m.changeY(m.getY()+int(m.getYVel()), d)
 
@@ -140,8 +143,8 @@ while(True):
 
     m.checkAlive()
 
-    m.printObject(d)
-    d.printScreen()
+    # m.printObject(d)
+    # d.printScreen()
 
     cnt += 1
 

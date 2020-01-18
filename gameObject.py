@@ -9,8 +9,8 @@ class gameObj:
         self.img = []
         self.width = 0
         self.height = 0
-        self.vel = np.array([0.0, 0.0])
-        self.acc = np.array([0.0, 0.0])
+        self.vel = np.array([0.0, 0.0],dtype='float64')
+        self.acc = np.array([0.0, 0.0],dtype='float64')
         self.index = index
         self.objType = ""
 
@@ -40,7 +40,7 @@ class gameObj:
         elif(new_x <= 0):
             new_x = 0
 
-        self.x = new_x
+        self.x = int(new_x)
 
     def changeY(self, new_y, s):
 
@@ -50,7 +50,7 @@ class gameObj:
         if(new_y > s.gnd-3):
             new_y = s.gnd-3
 
-        self.y = new_y
+        self.y = int(new_y)
 
 
     def printObject(self,s):
