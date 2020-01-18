@@ -34,8 +34,11 @@ class gameObj:
 
     def changeX(self, new_x, s):
 
-        if(new_x > s.wdt-3 or new_x < 0):
-            return
+        if(new_x >= s.wdt-3):
+            new_x = s.wdt-3
+        
+        elif(new_x <= 0):
+            new_x = 0
 
         self.x = new_x
 
@@ -56,8 +59,12 @@ class gameObj:
             for j in range(self.width):
                 s.display[self.y+i, self.x+j] = self.img[i, j]
 
-    def removeObj(self,objList,ind):
+    def removeObj(self,objList,ind,s):
         if(self.x == 0):
+            objList.remove(self)
+            ind -= 1
+        
+        elif(self.x >= s.wdt-3):
             objList.remove(self)
             ind -= 1
 

@@ -13,6 +13,7 @@ from alarmex import AlarmException
 from inp import getCh
 from asynch import KBHit
 from coins import *
+from bullets import *
 
 r, c = os.popen('stty size', 'r').read().split()
 r = int(r)-3
@@ -58,12 +59,12 @@ while(True):
                 objList[j].changeY(objList[ind-6].getY(),d)
 
     
-    for j in objList:
-        j.printObject(d)
-        j.changeX(j.getX()+j.getXVel(),d)
+    # for j in objList:
+    #     j.printObject(d)
+    #     j.changeX(j.getX()+j.getXVel(),d)
 
-    m.printObject(d)
-    d.printScreen()
+    # m.printObject(d)
+    # d.printScreen()
 
     if kb.kbhit():
 
@@ -86,8 +87,22 @@ while(True):
 
         elif(inp == 'd'):
             m.changeXVel(1)
+        
+        elif(inp == 'l'):
+            v = Bullet(d,ind)
+            objList.append(v)
+            ind += 1
+
+            v.createBullet(m.x+1,m.y+1)
 
         m.changeX(m.getX()+int(m.getXVel()), d)
+
+    for j in objList:
+        j.printObject(d)
+        j.changeX(j.getX()+j.getXVel(),d)
+
+    m.printObject(d)
+    d.printScreen()
 
     if(not flying):
 
@@ -99,7 +114,7 @@ while(True):
     cnt += 1
 
     for j in objList:
-        ind = j.removeObj(objList,ind)
+        ind = j.removeObj(objList,ind,d)
     
     ind = m.checkCollision(objList,ind)
 

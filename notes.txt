@@ -20,3 +20,9 @@ inheritance and polymorphism compulsory
 duck typing
 
 privitize variables at end
+
+to do:
+
+1. Bullets
+2. Magnet
+3. Boss
