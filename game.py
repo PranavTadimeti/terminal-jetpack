@@ -31,6 +31,7 @@ objList = []
 cnt = 0
 ind = 0
 flag = 0
+shield = 0
 
 # game loop
 while(True):
@@ -59,6 +60,16 @@ while(True):
                 objList[j].changeX(objList[ind-6].getX()+(j-ind+6),d)
                 objList[j].changeY(objList[ind-6].getY(),d)
 
+    if(shield == 2):
+        if(time.time() - tim >= 10):
+            shield = 0
+    
+    elif(shield == 1):
+        if(time.time() - tim >= 10):
+            m.shieldActivate(0,curr_lives)
+            shield = 2
+            tim = time.time()
+    
     if kb.kbhit():
 
         inp = kb.getch()
@@ -93,12 +104,19 @@ while(True):
                 flag = 0
             else:
                 flag = 1
+        
+        elif(inp == ' '):
+            if(shield == 0):
+                tim = time.time()
+                shield = 1
+                curr_lives = m.shieldActivate(1,0)
 
         m.changeX(m.getX()+int(m.getXVel()), d)
 
     if(flag):
         for j in objList:
-            j.changeXVel(j.getXVel()-2)
+            if(j.objType != "bullet"):
+                j.changeXVel(j.getXVel()-1)
 
     for j in objList:
 
