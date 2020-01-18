@@ -61,7 +61,7 @@ while(True):
                 objList[j].changeY(objList[ind-6].getY(),d)
 
     if(shield == 2):
-        if(time.time() - tim >= 10):
+        if(time.time() - tim >= 60):
             shield = 0
     
     elif(shield == 1):
