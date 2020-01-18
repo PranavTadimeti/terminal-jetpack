@@ -13,7 +13,7 @@ class Mando(gameObj):
         self.width = 3
         self.height = 3
         self.vel = np.array([0, 0], dtype='float64')
-        self.acc = np.array([0, 0.115], dtype='float64')
+        self.acc = np.array([0, 0.12], dtype='float64')
         self.lives = 3
         self.score = 0
 

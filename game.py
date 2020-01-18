@@ -124,7 +124,7 @@ while(True):
 
     if(not flying):
 
-        if(m.getYVel() <= 1.75):
+        if(m.getYVel() <= 1):
             m.changeYVel(m.getYVel()+m.acc[1])
     
     for j in objList:
@@ -146,4 +146,4 @@ while(True):
 
     cnt += 1
 
-    time.sleep(0.0175)
+    time.sleep(0.018)
