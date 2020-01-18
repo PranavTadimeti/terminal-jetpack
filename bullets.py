@@ -25,31 +25,33 @@ class Bullet(gameObj):
 
     def checkCollision(self, objList, ind):
 
-        r1 = list(range(self.x-10, self.x+self.width+10))
+        r1 = list(range(self.x-5, self.x+self.width+1))
         r3 = list(range(self.y, self.y+self.height+1))
+
+        s1 = set(r1)
+        s3 = set(r3)
         
         for o in objList:
             
-            r2 = list(range(o.getX()-5, o.getX()+o.width+1))
-            
-            r4 = list(range(o.getY(), o.getY()+o.height+1))
+            if(o.objType == "beam"):
 
-            s1 = set(r1)
-            s2 = set(r2)
-            s3 = set(r3)
-            s4 = set(r4)
-            
+                r2 = list(range(o.getX()-2, o.getX()+o.width+1))
+                
+                r4 = list(range(o.getY(), o.getY()+o.height+1))
 
-            a1 = list(s1 & s2)
-            a2 = list(s3 & s4)
+                s2 = set(r2)
+                s4 = set(r4)
+                
 
-            # print(a1,a2)
+                a1 = s1.intersection(s2)
+                a2 = s3.intersection(s4)
 
-            if(len(a1) and len(a2)):
+                if(len(a1) and len(a2)):
 
-                if(o.objType == "beam"):
                     objList.remove(o)
                     objList.remove(self)
                     ind -= 2
 
-            return ind
+                    return ind
+
+        return ind

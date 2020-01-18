@@ -119,23 +119,21 @@ while(True):
                 j.changeXVel(j.getXVel()-1)
         
     for j in objList:
-        j.printObject(d)
+        j.changeX(j.getX()+j.getXVel(),d)
+        ind = j.removeObj(objList,ind,d)
 
     if(not flying):
 
         if(m.getYVel() <= 1.75):
             m.changeYVel(m.getYVel()+m.acc[1])
     
-    m.printObject(d)
-    d.printScreen()
-    
     for j in objList:
 
         if(j.objType == "bullet"):
             ind = j.checkCollision(objList,ind)
-        
-        j.changeX(j.getX()+j.getXVel(),d)
-        ind = j.removeObj(objList,ind,d)
+    
+    for j in objList:
+        j.printObject(d)
 
     m.changeY(m.getY()+int(m.getYVel()), d)
 
@@ -143,8 +141,8 @@ while(True):
 
     m.checkAlive()
 
-    # m.printObject(d)
-    # d.printScreen()
+    m.printObject(d)
+    d.printScreen()
 
     cnt += 1
 
