@@ -13,10 +13,12 @@ class Mando(gameObj):
         self.width = 3
         self.height = 3
         self.vel = np.array([0, 0], dtype='float64')
-        self.acc = np.array([0, 0.12], dtype='float64')
-        self.lives = 3
+        self.acc = np.array([0, 0.115], dtype='float64')
+        self.lives = 3000
         self.score = 0
-
+        self.boostOn = 0
+        self.boostCnt = 0
+ 
     def checkCollision(self,objList,ind):
 
         for o in objList:
@@ -38,6 +40,10 @@ class Mando(gameObj):
                 
                 elif(o.objType == "coin"):
                     self.score += 50
+                
+                elif(o.objType == "boost"):
+                    self.boostOn = 1
+                    self.boostCnt = 1
         
         return ind
     

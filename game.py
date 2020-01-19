@@ -14,12 +14,14 @@ from inp import getCh
 from asynch import KBHit
 from coins import *
 from bullets import *
- 
+from magnet import *
+from speedBoost import *
+
 r, c = os.popen('stty size', 'r').read().split()
 r = int(r)-3
 c = int(c)
 
-init()
+init() 
 
 d = Screen(r, c, np.full((r, c), Back.BLUE+" "))
 
@@ -32,6 +34,8 @@ cnt = 0
 ind = 0
 flag = 0
 shield = 0
+mag = 0
+speedCnt = 0
 
 # game loop
 while(True):
@@ -60,6 +64,11 @@ while(True):
                 objList[j].changeX(objList[ind-6].getX()+(j-ind+6),d)
                 objList[j].changeY(objList[ind-6].getY(),d)
 
+    if(cnt%2000 == 0):
+        sp = Boost(d,ind)
+        objList.append(sp)
+        ind += 1
+
     if(shield == 2):
         if(time.time() - tim >= 60):
             shield = 0
@@ -87,10 +96,10 @@ while(True):
             m.changeXVel(0)
 
         elif(inp == 'a'):
-            m.changeXVel(-1)
+            m.changeXVel(-1.5)
 
         elif(inp == 'd'):
-            m.changeXVel(1)
+            m.changeXVel(1.5)
         
         elif(inp == 'l'):
             v = Bullet(d,ind)
@@ -99,12 +108,6 @@ while(True):
 
             v.createBullet(m.getX()+3,m.getY()+1)
         
-        elif(inp == 'f'):
-            if(flag):
-                flag = 0
-            else:
-                flag = 1
-        
         elif(inp == ' '):
             if(shield == 0):
                 tim = time.time()
@@ -112,28 +115,40 @@ while(True):
                 curr_lives = m.shieldActivate(1,0)
 
         m.changeX(m.getX()+int(m.getXVel()), d)
-
-    if(flag):
-        for j in objList:
-            if(j.objType != "bullet"):
-                j.changeXVel(j.getXVel()-1)
+    
+    if(m.boostCnt < 200):
+        m.boostCnt += 1
+    else:
+        m.boostOn = 0
         
     for j in objList:
         j.changeX(j.getX()+j.getXVel(),d)
         ind = j.removeObj(objList,ind,d)
 
+        if(m.boostOn and (j.objType != "bullet" and j.objType != "boost")):
+            j.changeXVel(j.getXVel()-1)
+
     if(not flying):
 
         if(m.getYVel() <= 1):
             m.changeYVel(m.getYVel()+m.acc[1])
-    
+        else:
+            m.changeYVel(1)
+
+
     for j in objList:
 
         if(j.objType == "bullet"):
             ind = j.checkCollision(objList,ind)
+        
+        elif(j.objType == "magnet"):
+            j.attract(m)
     
     for j in objList:
         j.printObject(d)
+    
+    else:
+        mag = 0
 
     m.changeY(m.getY()+int(m.getYVel()), d)
 

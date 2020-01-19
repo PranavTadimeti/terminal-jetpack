@@ -34,8 +34,8 @@ class gameObj:
 
     def changeX(self, new_x, s):
 
-        if(new_x >= s.wdt-3):
-            new_x = s.wdt-3
+        if(new_x >= s.width-3):
+            new_x = s.width-3
         
         elif(new_x <= 0):
             new_x = 0
@@ -45,7 +45,7 @@ class gameObj:
     def changeY(self, new_y, s):
 
         if(new_y < 0):
-            return
+            new_y = 0
 
         if(new_y > s.gnd-3):
             new_y = s.gnd-3
@@ -64,7 +64,7 @@ class gameObj:
             objList.remove(self)
             ind -= 1
         
-        elif(self.x >= s.wdt-3):
+        elif(self.x >= s.width-3):
             objList.remove(self)
             ind -= 1
 

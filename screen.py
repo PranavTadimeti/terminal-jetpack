@@ -5,9 +5,9 @@ import numpy as np
 
 class Screen:
 
-    def __init__(self, ht, wdt, display):
+    def __init__(self, ht, width, display):
         self.display = display
-        self.wdt = wdt
+        self.width = width
         self.ht = ht
         self.gnd = int((self.ht*4)/5)
 
@@ -21,4 +21,4 @@ class Screen:
         print(s)
 
         print("\033[0;0H")
-        
+         

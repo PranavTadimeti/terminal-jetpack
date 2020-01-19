@@ -9,7 +9,7 @@ class Beams(gameObj):
 
     def __init__(self, s,ind):
         self.s = s
-        self.x = s.wdt-7
+        self.x = s.width-7
         self.y = randrange(self.s.gnd-5)
         self.vel = np.array([-1, 0])
         self.acc = np.array([0, 0])

@@ -18,7 +18,7 @@ class Bullet(gameObj):
         self.index = index 
         self.objType = "bullet"
 
-    def createBullet(self, x, y):
+    def createBullet(self, x, y): 
         self.x = x+1
         self.y = y
         self.vel[0] = 1
