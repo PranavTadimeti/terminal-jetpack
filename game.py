@@ -90,13 +90,13 @@ while(True):
             '''flying = 1
             m.changeYVel(-1.25)
             m.changeXVel(0)
-
-        elif(inp == 's'):
-            m.changeYVel(1)
-            m.changeXVel(0)
         '''
             flying = 1
             m.changeYVel(m.getYVel()-2)
+            m.changeXVel(0)
+        
+        elif(inp == 's'):
+            m.changeYVel(m.getYVel()+0.5)
             m.changeXVel(0)
 
         elif(inp == 'a'):
