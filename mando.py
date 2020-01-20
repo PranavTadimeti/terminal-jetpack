@@ -18,10 +18,14 @@ class Mando(gameObj):
         self.score = 0
         self.boostOn = 0
         self.boostCnt = 0
- 
+    
     def checkCollision(self,objList,ind):
 
         for o in objList:
+            
+            if(o.objType == "magnet"):
+                continue
+
             r1 = range(self.x,self.x+self.width+1)
             r2 = range(o.x,o.x+o.width+1)
 
