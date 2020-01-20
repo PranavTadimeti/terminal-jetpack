@@ -11,8 +11,13 @@ class Screen:
         self.ht = ht
         self.gnd = int((self.ht*4)/5)
 
-    def createScreen(self):
-        self.display[0:self.ht,:] = Back.CYAN+" "
+    def createScreen(self,bossFight):
+
+        if(bossFight):
+            self.display[0:self.ht,:] = Back.BLACK+" "
+        else:
+            self.display[0:self.ht,:] = Back.CYAN+" "
+        
         self.display[self.gnd:self.ht,:] = Back.GREEN+" "
 
     def printScreen(self):

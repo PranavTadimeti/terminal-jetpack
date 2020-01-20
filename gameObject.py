@@ -46,11 +46,10 @@ class gameObj:
         if(new_y < 0):
             new_y = 0
 
-        if(new_y > s.gnd-3):
-            new_y = s.gnd-3
+        if(new_y+self.height > s.gnd):
+            new_y = s.gnd-self.height
 
         self.y = int(new_y)
-
 
     def printObject(self,s):
 
