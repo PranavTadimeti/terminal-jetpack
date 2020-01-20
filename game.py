@@ -87,12 +87,16 @@ while(True):
             break
 
         elif(inp == 'w'):
-            flying = 1
+            '''flying = 1
             m.changeYVel(-1.25)
             m.changeXVel(0)
 
         elif(inp == 's'):
             m.changeYVel(1)
+            m.changeXVel(0)
+        '''
+            flying = 1
+            m.changeYVel(m.getYVel()-2)
             m.changeXVel(0)
 
         elif(inp == 'a'):
@@ -128,13 +132,14 @@ while(True):
         if(m.boostOn and (j.objType != "bullet" and j.objType != "boost")):
             j.changeXVel(j.getXVel()-1)
 
-    if(not flying):
+    m.changeYVel(m.getYVel()+m.acc[1])
 
-        if(m.getYVel() <= 1):
-            m.changeYVel(m.getYVel()+m.acc[1])
-        else:
-            m.changeYVel(1)
+    if(m.getYVel() > 1):
+        m.changeYVel(1)
+    elif(m.getYVel() < -1):
+        m.changeYVel(-1)
 
+    print(m.getXVel(),m.getYVel())
 
     for j in objList:
 
