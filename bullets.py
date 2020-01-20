@@ -7,6 +7,9 @@ import numpy as np
 class Bullet(gameObj):
 
     def __init__(self, s, index):
+
+        super().__init__()
+        
         self.img = np.full((1, 3), Back.MAGENTA+"D")
         self.s = s
         self.x = 0

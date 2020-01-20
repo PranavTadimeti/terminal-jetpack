@@ -8,6 +8,9 @@ from colorama import *
 class Beams(gameObj):
 
     def __init__(self, s,ind):
+
+        super().__init__()
+        
         self.s = s
         self.x = s.width-7
         self.y = randrange(self.s.gnd-5)

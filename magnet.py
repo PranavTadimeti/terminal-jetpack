@@ -7,6 +7,9 @@ from colorama import *
 class Magnet(gameObj):
 
     def __init__(self,s):
+
+        super().__init__()
+        
         self.s = s
         self.img = np.array([[Back.RED+' ',Back.RED+' ',Back.RED+' ',Back.RED+' '],[Back.RED+' ',Back.CYAN+' ',Back.CYAN+' ',Back.RED+' '],[Back.RED+' ',Back.CYAN+' ',Back.CYAN+' ',Back.RED+' '],[Back.RED+' ',Back.CYAN+' ',Back.CYAN+' ',Back.RED+' ']])
         self.x = self.s.width-7

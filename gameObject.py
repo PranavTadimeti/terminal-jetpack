@@ -5,13 +5,12 @@ import numpy as np
 
 class gameObj:
 
-    def __init__(self,index):
+    def __init__(self):
         self.img = []
         self.width = 0
         self.height = 0
         self.vel = np.array([0.0, 0.0],dtype='float64')
         self.acc = np.array([0.0, 0.0],dtype='float64')
-        self.index = index
         self.objType = ""
 
     def getX(self):

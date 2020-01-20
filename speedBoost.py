@@ -7,6 +7,9 @@ from random import randrange
 class Boost(gameObj):
 
     def __init__(self,s,index):
+
+        super().__init__()
+        
         self.img = np.full((1,1),Back.BLUE+"S")
         self.x = s.width-5
         self.y = randrange(s.gnd-3)
@@ -16,5 +19,4 @@ class Boost(gameObj):
         self.width = 1
         self.index = index
         self.objType = "boost"
-    
     

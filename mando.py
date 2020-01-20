@@ -6,6 +6,9 @@ from gameObject import *
 
 class Mando(gameObj):
     def __init__(self):
+
+        super().__init__()
+        
         self.img = np.array([[" "," ", Back.BLACK+'O'], [Back.BLACK+'[', Back.BLACK+']', Back.BLACK+'|'], 
         [' ', ' ',Back.BLACK+ 'L']])
         self.x = 5
@@ -14,7 +17,7 @@ class Mando(gameObj):
         self.height = 3
         self.vel = np.array([0, 0], dtype='float64')
         self.acc = np.array([0, 0.115], dtype='float64')
-        self.lives = 3000
+        self.lives = 5
         self.score = 0
         self.boostOn = 0
         self.boostCnt = 0

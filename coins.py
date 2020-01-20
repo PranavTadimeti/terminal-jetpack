@@ -7,6 +7,9 @@ from random import randint, randrange, random
 class Coin(gameObj):
 
     def __init__(self, s,index):
+
+        super().__init__()
+        
         self.img = np.full((1, 1), Back.YELLOW+"C")
         self.s = s
         self.x = s.width-7

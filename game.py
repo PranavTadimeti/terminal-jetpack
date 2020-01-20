@@ -67,7 +67,7 @@ while(True):
         objList.append(sp)
         ind += 1
  
-    if(cnt == 600):
+    if(cnt == 1000):
         tempMag = Magnet(d)
         objList.append(tempMag)
         ind += 1
