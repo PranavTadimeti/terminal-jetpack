@@ -10,20 +10,21 @@ class Boss(gameObj):
         super().__init__()
 
          
-        tempStr =       r"""        
-                                ,===:'.,            `-._
-                                        `:.`---.__         `-._
-                                        `:.     `--.         `.
-                                            \.        `.         `.
-                                    (,,(,    \.         `.   ____,-`.,
-                                (,'     `/   \.   ,--.___`.'
-                            ,  ,'  ,--.  `,   \.;'         `
-                             `{D, {    \  :    \;
-                                V,,'    /  /    //
-                                j;;    /  ,' ,-//.    ,---.      ,
-                                \;'   /  ,' /  _  \  /  _  \   ,'/
-                                    \   `'  / \  `'  / \  `.' /
-                                    `.___,'   `.__,'   `.__,'"""  
+            
+        tempStr =   r"""           
+            ,===:'.,            `-._
+                `:.`---.__         `-._
+                    `:.     `--.         `.
+                    \.        `.         `.
+            (,,(,    \.         `.   ____,-`.,
+            (,'     `/   \.   ,--.___`.'
+        ,  ,'  ,--.  `,   \.;'         `
+        `{D, {    \  :    \;
+        V,,'    /  /    //
+        j;;    /  ,' ,-//.    ,---.      ,
+        \;'   /  ,' /  _  \  /  _  \   ,'/
+                \   `'  / \  `'  / \  `.' /
+                `.___,'   `.__,'   `.__,'"""  
         
         tempStr2 = tempStr.split('\n')
         
@@ -47,17 +48,17 @@ class Boss(gameObj):
         
         self.img = np.array(self.img)
 
-        print(np.shape(self.img))
-
         for i in self.img:
             for j in i:
                 j = Back.BLACK+j
 
-        self.x = s.width-80
+        self.x = s.width-50
 
         self.y = s.gnd-50
 
         self.height = 14
-        self.width = 70
+        self.width = 46
 
-# b = Boss(d,m)
+'''d=0
+m=0
+b = Boss(d,m)'''
