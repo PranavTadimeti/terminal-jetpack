@@ -11,29 +11,28 @@ class Beams(gameObj):
 
         super().__init__()
         
-        self.s = s
-        self.x = s.width-7
-        self.y = randrange(self.s.gnd-5)
-        self.vel = np.array([-1, 0])
-        self.acc = np.array([0, 0])
-        self.index = ind
-        self.objType = "beam"
+        self._x = s.getWidth()-7
+        self._y = randrange(s.getGnd()-5)
+        self._vel = np.array([-1, 0])
+        self._acc = np.array([0, 0])
+        self._index = ind
+        self._objType = "beam"
      
     def pickType(self):
         i = randrange(3)
 
         if(i == 0):
-            self.img = np.full((1,7),Back.RED+"@")
-            self.height = 1
-            self.width = 7
+            self._img = np.full((1,7),Back.RED+"@")
+            self._height = 1
+            self._width = 7
         elif(i == 1):
-            self.img = np.array([[Back.RED+'@',Back.CYAN+" ",Back.CYAN+" ",Back.CYAN+" ",Back.CYAN+" "],[Back.CYAN+" ",Back.RED+'@',Back.CYAN+" ",Back.CYAN+" ",Back.CYAN+" "],
+            self._img = np.array([[Back.RED+'@',Back.CYAN+" ",Back.CYAN+" ",Back.CYAN+" ",Back.CYAN+" "],[Back.CYAN+" ",Back.RED+'@',Back.CYAN+" ",Back.CYAN+" ",Back.CYAN+" "],
             [Back.CYAN+" ",Back.CYAN+" ",Back.RED+"@",Back.CYAN+" ",Back.CYAN+" "],[Back.CYAN+" ",Back.CYAN+" ",Back.CYAN+" ",Back.RED+'@',Back.CYAN+" "],
             [Back.CYAN+" ",Back.CYAN+" ",Back.CYAN+" ",Back.CYAN+" ",Back.RED+'@']])
-            self.height = 5
-            self.width = 5
+            self._height = 5
+            self._width = 5
         else:
-            self.img = np.full((5,1),Back.RED+"@")
-            self.height = 5
-            self.width = 1
+            self._img = np.full((5,1),Back.RED+"@")
+            self._height = 5
+            self._width = 1
 

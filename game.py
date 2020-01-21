@@ -47,7 +47,8 @@ while(True):
     y = m.getY()
     x = m.getX()
 
-    print("SCORE: ",m.getScore(),"\tLIVES: ",m.getLives())
+    # print("SCORE: ",m.getScore(),"\tLIVES: ",m.getLives())
+    print(y,x)
 
     d.createScreen(m.getGame())
 
@@ -74,12 +75,12 @@ while(True):
         objList.append(sp)
         ind += 1
  
-    if(cnt  == 3000 and m.getGame()):
+    if(cnt  == 100 and m.getGame()):
         tempMag = Magnet(d)
         objList.append(tempMag)
         ind += 1
     
-    if(cnt == 100):
+    if(cnt == 1000):
         bo = Boss(d,m)
         m.setGame(0)
         objList.append(bo)
@@ -132,7 +133,7 @@ while(True):
                 curr_lives = m.shieldActivate(1, 0)
 
     for j in objList:
-        if(j.objType == "magnet"):
+        if(j.getObjType() == "magnet"):
             j.attract(m)
 
     if(m.getXVel() > 1.5):
@@ -142,7 +143,7 @@ while(True):
 
     m.changeX(m.getX()+int(m.getXVel()), d)
 
-    m.changeYVel(m.getYVel()+m.acc[1])
+    m.changeYVel(m.getYVel()+m.getYAcc())
 
     if(m.getYVel() > 1):
         m.changeYVel(1)
@@ -158,21 +159,21 @@ while(True):
         j.changeX(j.getX()+j.getXVel(), d)
         ind = j.removeObj(objList, ind, d)
 
-        if(m.getBoostOn() and (j.objType != "bullet" and j.objType != "boost" and j.objType != "boss")):
+        if(m.getBoostOn() and (j.getObjType() != "bullet" and j.getObjType() != "boost" and j.getObjType() != "boss")):
             j.changeXVel(j.getXVel()-1)
 
     for j in objList:
 
-        if(j.objType == "bullet"):
+        if(j.getObjType() == "bullet"):
             ind = j.checkCollision(objList, ind)
-        elif(j.objType == "bossBullet"):
+        elif(j.getObjType() == "bossBullet"):
             ind = j.checkCollision(objList,m,ind)
 
     
     for j in objList:
-        j.printObject(d)
+        d.renderObject(j)
     
-    if(m.getGame() == 0 and bo.lives > 0):
+    if(m.getGame() == 0 and bo.getLives() > 0):
         if(cnt % 50 == 0):
             tempBullet = bossBullet(d,ind)
             objList.append(tempBullet)
@@ -182,7 +183,7 @@ while(True):
 
         bo.changeY(m.getY(),d)
 
-    elif(m.getGame() == 0 and bo.lives == 0 and not yodaMade):
+    elif(m.getGame() == 0 and bo.getLives() == 0 and not yodaMade):
         yoda = babyYoda(d,ind)
         objList.append(yoda)
         ind += 1
@@ -193,12 +194,12 @@ while(True):
 
     ind = m.checkCollision(objList, ind)
 
-    if(m.done):
+    if(m.getDone()):
         break
 
     m.checkAlive()
 
-    m.printObject(d)
+    d.renderObject(m)
     d.printScreen()
 
     cnt += 1

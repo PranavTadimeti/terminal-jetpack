@@ -10,13 +10,13 @@ class babyYoda(gameObj):
 
         super().__init__()
 
-        self.img = np.array([['<','•','•','>'],['(',' ',' ',')']])
+        self._img = np.array([['<','•','•','>'],['(',' ',' ',')']])
 
-        self.width = 4
-        self.height = 2
+        self._width = 4
+        self._height = 2
 
-        self.x = s.width - 20
-        self.y = s.gnd - 2
+        self._x = s.getWidth() - 20
+        self._y = s.getGnd() - 2
 
-        self.objType = "yoda"
-        self.index = index
+        self._objType = "yoda"
+        self._index = index

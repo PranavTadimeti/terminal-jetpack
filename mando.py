@@ -8,33 +8,33 @@ class Mando(gameObj):
 
         super().__init__()
 
-        self.img = np.array([[" "," ", Back.BLACK+'O'], [Back.BLACK+'[', Back.BLACK+']', Back.BLACK+'|'], 
+        self._img = np.array([[" "," ", Back.BLACK+'O'], [Back.BLACK+'[', Back.BLACK+']', Back.BLACK+'|'], 
         [' ', ' ',Back.BLACK+ 'L']])
-        self.x = 5
-        self.y = 5
-        self.width = 3
-        self.height = 3
-        self.vel = np.array([0, 0], dtype='float64')
-        self.acc = np.array([0, 0.115], dtype='float64')
-        self.lives = 5
-        self.score = 0
-        self.boostOn = 0
-        self.boostCnt = 0
-        self.regularGame = 0
-        self.done = 0
+        self._x = 5
+        self._y = 5
+        self._width = 3
+        self._height = 3
+        self._vel = np.array([0, 0], dtype='float64')
+        self._acc = np.array([0, 0.115], dtype='float64')
+        self._lives = 5
+        self._score = 0
+        self._boostOn = 0
+        self._boostCnt = 0
+        self._regularGame = 0
+        self._done = 0
 
     def checkCollision(self,objList,ind):
 
         for o in objList:
             
-            if(o.objType == "magnet"):
+            if(o.getObjType() == "magnet"):
                 continue
 
-            r1 = range(self.x,self.x+self.width+1)
-            r2 = range(o.x,o.x+o.width+1)
+            r1 = range(self._x,self._x+self._width+1)
+            r2 = range(o.getX(),o.getX()+o.getWidth()+1)
 
-            r3 = range(self.y,self.y+self.height+1)
-            r4 = range(o.y,o.y+o.height+1)
+            r3 = range(self._y,self._y+self._height+1)
+            r4 = range(o.getY(),o.getY()+o.getHeight()+1)
 
             s1 = set(r1)
             s2 = set(r3)
@@ -43,72 +43,72 @@ class Mando(gameObj):
                 objList.remove(o)
                 ind -= 1
 
-                if(o.objType == "yoda"):
-                    self.done = 1
+                if(o.getObjType() == "yoda"):
+                    self._done = 1
 
-                elif(o.objType == "beam"):
-                    self.lives -= 1
+                elif(o.getObjType() == "beam"):
+                    self._lives -= 1
                 
-                elif(o.objType == "coin"):
-                    self.score += 50
+                elif(o.getObjType() == "coin"):
+                    self._score += 50
                 
-                elif(o.objType == "boost"):
-                    self.boostOn = 1
-                    self.boostCnt = 1
+                elif(o.getObjType() == "boost"):
+                    self._boostOn = 1
+                    self._boostCnt = 1
         
         return ind
     
     def checkAlive(self):
-        if(self.lives == 0):
-            print(self.score)
+        if(self._lives == 0):
+            print(self._score)
             sys.exit(0)
 
     def shieldActivate(self,on,curr_lives):
         if(on):
-            curr_lives = self.lives
-            self.lives += 1000
+            curr_lives = self._lives
+            self._lives += 1000
 
-            self.img = np.array([[" "," ", Back.BLUE+'O'], [Back.BLUE+'[', Back.BLUE+']', Back.BLUE+'|'], 
+            self._img = np.array([[" "," ", Back.BLUE+'O'], [Back.BLUE+'[', Back.BLUE+']', Back.BLUE+'|'], 
             [' ', ' ',Back.BLUE+ 'L']])
         else:
-            self.lives = curr_lives
-            self.img = np.array([[" "," ", Back.BLACK+'O'], [Back.BLACK+'[', Back.BLACK+']', Back.BLACK+'|'], 
+            self._lives = curr_lives
+            self._img = np.array([[" "," ", Back.BLACK+'O'], [Back.BLACK+'[', Back.BLACK+']', Back.BLACK+'|'], 
             [' ', ' ',Back.BLACK+ 'L']])
         
         return curr_lives
     
     def getLives(self):
-        return self.lives
+        return self._lives
 
     def setLives(self,new_lives):
-        self.lives = new_lives
+        self._lives = new_lives
     
     def getScore(self):
-        return self.lives
+        return self._lives
     
     def setScore(self,new_score):
-        self.score = new_score
+        self._score = new_score
     
     def setBoostOn(self,new_b):
-        self.boostOn = new_b
+        self._boostOn = new_b
     
     def getBoostOn(self):
-        return self.boostOn
+        return self._boostOn
     
     def setBoostCnt(self,new_b):
-        self.boostCnt = new_b
+        self._boostCnt = new_b
     
     def getBoostCnt(self):
-        return self.boostCnt
+        return self._boostCnt
     
     def getDone(self):
-        return self.done
+        return self._done
     
     def setDone(self,new_done):
-        self.done = new_done
+        self._done = new_done
     
     def getGame(self):
-        return self.regularGame
+        return self._regularGame
     
     def setGame(self,new_game):
-        self.regularGame = new_game
+        self._regularGame = new_game
