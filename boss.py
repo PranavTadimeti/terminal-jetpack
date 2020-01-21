@@ -59,6 +59,10 @@ class Boss(gameObj):
         self.height = 14
         self.width = 46
 
+        self.objType = "boss"
+
+        self.lives = 10
+
 '''d=0
 m=0
 b = Boss(d,m)'''

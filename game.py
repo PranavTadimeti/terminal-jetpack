@@ -17,6 +17,7 @@ from bullets import *
 from magnet import *
 from speedBoost import *
 from boss import *
+from bossBullets import *
 
 r, c = os.popen('stty size', 'r').read().split()
 r = int(r)-3
@@ -36,7 +37,6 @@ flag = 0
 shield = 0
 mag = 0
 speedCnt = 0
-bossFight = 0
 
 # game loop
 while(True):
@@ -44,15 +44,15 @@ while(True):
     y = m.getY()
     x = m.getX()
 
-    d.createScreen(bossFight)
+    d.createScreen(m.bossFight)
 
-    if(cnt % 60 == 0 and not bossFight):
+    if(cnt % 60 == 0 and not m.bossFight):
         t = Beams(d, ind)
         objList.append(t)
         t.pickType()
         ind += 1
 
-    if(cnt % 100 == 0 and not bossFight):
+    if(cnt % 100 == 0 and not m.bossFight):
 
         for i in range(6):
             objList.append(Coin(d, ind))
@@ -64,19 +64,21 @@ while(True):
                 objList[j].changeX(objList[ind-6].getX()+(j-ind+6), d)
                 objList[j].changeY(objList[ind-6].getY(), d)
 
-    if(cnt % 2000 == 0 and not bossFight):
+    if(cnt % 2000 == 0 and not m.bossFight):
         sp = Boost(d, ind)
         objList.append(sp)
         ind += 1
  
-    if(cnt  == 1000 and not bossFight):
+    if(cnt  == 1000 and not m.bossFight):
         tempMag = Magnet(d)
         objList.append(tempMag)
         ind += 1
     
     if(cnt == 100):
         bo = Boss(d,m)
-        bossFight = 1
+        m.bossFight = 1
+        objList.append(bo)
+        ind += 1
 
     if(shield == 2):
         if(time.time() - tim >= 60):
@@ -158,14 +160,26 @@ while(True):
 
         if(j.objType == "bullet"):
             ind = j.checkCollision(objList, ind)
+        elif(j.objType == "bossBullet"):
+            ind = j.checkCollision(objList,m,ind)
 
     
     for j in objList:
         j.printObject(d)
     
-    if(bossFight):
-        bo.printObject(d)
+    if(m.bossFight):
+        if(cnt % 20 == 0):
+            tempBullet = bossBullet(d,ind)
+            objList.append(tempBullet)
+            ind += 1
+
+            tempBullet.createBullet(bo.getX(),bo.getY(),bo)
+
         bo.changeY(m.getY(),d)
+
+        if(bo.lives == 0):
+            m.bossFight = 0
+            break
 
     m.changeY(m.getY()+int(m.getYVel()), d)
 
@@ -179,3 +193,6 @@ while(True):
     cnt += 1
 
     time.sleep(0.018)
+
+print(Back.BLACK)
+print("YOU WIN!!!")

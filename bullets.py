@@ -56,5 +56,30 @@ class Bullet(gameObj):
                     ind -= 2
 
                     return ind
+            
+            elif(o.objType == "boss"):
+
+                r2 = list(range(o.getX()-2, o.getX()+o.width+1))
+                        
+                r4 = list(range(o.getY(), o.getY()+o.height+1))
+
+                s2 = set(r2)
+                s4 = set(r4)
+                        
+
+                a1 = s1.intersection(s2)
+                a2 = s3.intersection(s4)
+
+                if(len(a1) and len(a2)):
+                    o.lives -= 1
+
+                    if(o.lives == 0):
+                        objList.remove(o)
+                        
+                    objList.remove(self)
+                    ind -= 2
+
+                    return ind
+
 
         return ind

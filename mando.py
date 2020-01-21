@@ -8,7 +8,7 @@ class Mando(gameObj):
     def __init__(self):
 
         super().__init__()
-        
+
         self.img = np.array([[" "," ", Back.BLACK+'O'], [Back.BLACK+'[', Back.BLACK+']', Back.BLACK+'|'], 
         [' ', ' ',Back.BLACK+ 'L']])
         self.x = 5
@@ -21,6 +21,7 @@ class Mando(gameObj):
         self.score = 0
         self.boostOn = 0
         self.boostCnt = 0
+        self.bossFight = 0
     
     def checkCollision(self,objList,ind):
 

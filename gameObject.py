@@ -12,6 +12,7 @@ class gameObj:
         self.vel = np.array([0.0, 0.0],dtype='float64')
         self.acc = np.array([0.0, 0.0],dtype='float64')
         self.objType = ""
+        self.lives = 0
 
     def getX(self):
         return self.x 
