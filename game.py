@@ -38,7 +38,7 @@ flag = 0
 shield = 0
 mag = 0
 speedCnt = 0
-m.regularGame = 1
+m.setGame(1)
 yodaMade = 0
 
 # game loop
@@ -47,17 +47,17 @@ while(True):
     y = m.getY()
     x = m.getX()
 
-    print("SCORE: ",m.score,"\tLIVES: ",m.lives)
+    print("SCORE: ",m.getScore(),"\tLIVES: ",m.getLives())
 
-    d.createScreen(m.regularGame)
+    d.createScreen(m.getGame())
 
-    if(cnt % 60 == 0 and m.regularGame):
+    if(cnt % 60 == 0 and m.getGame()):
         t = Beams(d, ind)
         objList.append(t)
         t.pickType()
         ind += 1
 
-    if(cnt % 100 == 0 and m.regularGame):
+    if(cnt % 100 == 0 and m.getGame()):
 
         for i in range(6):
             objList.append(Coin(d, ind))
@@ -69,19 +69,19 @@ while(True):
                 objList[j].changeX(objList[ind-6].getX()+(j-ind+6), d)
                 objList[j].changeY(objList[ind-6].getY(), d)
 
-    if(cnt % 2000 == 0 and m.regularGame):
+    if(cnt % 2000 == 0 and m.getGame()):
         sp = Boost(d, ind)
         objList.append(sp)
         ind += 1
  
-    if(cnt  == 3000 and m.regularGame):
+    if(cnt  == 3000 and m.getGame()):
         tempMag = Magnet(d)
         objList.append(tempMag)
         ind += 1
     
     if(cnt == 100):
         bo = Boss(d,m)
-        m.regularGame = 0
+        m.setGame(0)
         objList.append(bo)
         ind += 1
 
@@ -149,16 +149,16 @@ while(True):
     elif(m.getYVel() < -1.5):
         m.changeYVel(-1.5)
 
-    if(m.boostCnt < 200):
-        m.boostCnt += 1
+    if(m.getBoostCnt() < 200):
+        m.setBoostCnt(m.getBoostCnt()+1)
     else:
-        m.boostOn = 0
+        m.setBoostOn(0)
 
     for j in objList:
         j.changeX(j.getX()+j.getXVel(), d)
         ind = j.removeObj(objList, ind, d)
 
-        if(m.boostOn and (j.objType != "bullet" and j.objType != "boost" and j.objType != "boss")):
+        if(m.getBoostOn() and (j.objType != "bullet" and j.objType != "boost" and j.objType != "boss")):
             j.changeXVel(j.getXVel()-1)
 
     for j in objList:
@@ -172,7 +172,7 @@ while(True):
     for j in objList:
         j.printObject(d)
     
-    if(m.regularGame == 0 and bo.lives > 0):
+    if(m.getGame() == 0 and bo.lives > 0):
         if(cnt % 50 == 0):
             tempBullet = bossBullet(d,ind)
             objList.append(tempBullet)
@@ -182,7 +182,7 @@ while(True):
 
         bo.changeY(m.getY(),d)
 
-    elif(m.regularGame == 0 and bo.lives == 0 and not yodaMade):
+    elif(m.getGame() == 0 and bo.lives == 0 and not yodaMade):
         yoda = babyYoda(d,ind)
         objList.append(yoda)
         ind += 1

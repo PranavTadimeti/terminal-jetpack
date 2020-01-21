@@ -42,7 +42,7 @@ class Mando(gameObj):
             if(s1.intersection(r2) and s2.intersection(r4)):
                 objList.remove(o)
                 ind -= 1
-                
+
                 if(o.objType == "yoda"):
                     self.done = 1
 
@@ -76,3 +76,39 @@ class Mando(gameObj):
             [' ', ' ',Back.BLACK+ 'L']])
         
         return curr_lives
+    
+    def getLives(self):
+        return self.lives
+
+    def setLives(self,new_lives):
+        self.lives = new_lives
+    
+    def getScore(self):
+        return self.lives
+    
+    def setScore(self,new_score):
+        self.score = new_score
+    
+    def setBoostOn(self,new_b):
+        self.boostOn = new_b
+    
+    def getBoostOn(self):
+        return self.boostOn
+    
+    def setBoostCnt(self,new_b):
+        self.boostCnt = new_b
+    
+    def getBoostCnt(self):
+        return self.boostCnt
+    
+    def getDone(self):
+        return self.done
+    
+    def setDone(self,new_done):
+        self.done = new_done
+    
+    def getGame(self):
+        return self.regularGame
+    
+    def setGame(self,new_game):
+        self.regularGame = new_game
