@@ -22,7 +22,7 @@ class bossBullet(gameObj):
     
     def createBullet(self,x,y,bo):
         self.x = x-1
-        self.y = y+int(bo.height/2)+2
+        self.y = y+int(bo.height/2)+2 
         self.vel[0] = -3
     
     def checkCollision(self,objList,m,ind):
