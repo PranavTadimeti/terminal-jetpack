@@ -8,8 +8,10 @@ class Mando(gameObj):
 
         super().__init__()
 
-        self._img = np.array([[" "," ", Back.BLACK+'O'], [Back.BLACK+'[', Back.BLACK+']', Back.BLACK+'|'], 
-        [' ', ' ',Back.BLACK+ 'L']])
+        # self._img = np.array([[" "," ", Back.BLACK+'O'], [Back.BLACK+'[', Back.BLACK+']', Back.BLACK+'|'], 
+        # [' ', ' ',Back.BLACK+ 'L']])
+        self._img = np.array([[Back.BLACK+'(',Back.BLACK+'T',Back.BLACK+')'],[Back.BLACK+'|',Back.BLACK+'@',Back.BLACK+'|']
+        ,[Back.BLACK+'/',' ',Back.BLACK+'\\']])
         self._x = 5
         self._y = 5
         self._width = 3
@@ -67,13 +69,13 @@ class Mando(gameObj):
         if(on):
             curr_lives = self._lives
             self._lives += 1000
-
-            self._img = np.array([[" "," ", Back.BLUE+'O'], [Back.BLUE+'[', Back.BLUE+']', Back.BLUE+'|'], 
-            [' ', ' ',Back.BLUE+ 'L']])
+            self._img = np.array([[Back.BLUE+'(',Back.BLUE+'T',Back.BLUE+')'],[Back.BLUE+'|',Back.BLUE+'@',Back.BLUE+'|']
+            ,[Back.BLUE+'/',' ',Back.BLUE+'\\']])
+            
         else:
             self._lives = curr_lives
-            self._img = np.array([[" "," ", Back.BLACK+'O'], [Back.BLACK+'[', Back.BLACK+']', Back.BLACK+'|'], 
-            [' ', ' ',Back.BLACK+ 'L']])
+            self._img = np.array([[Back.BLACK+'(',Back.BLACK+'T',Back.BLACK+')'],[Back.BLACK+'|',Back.BLACK+'@',Back.BLACK+'|']
+            ,[Back.BLACK+'/',' ',Back.BLACK+'\\']])
         
         return curr_lives
     
