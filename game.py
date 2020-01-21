@@ -69,12 +69,12 @@ while(True):
         objList.append(sp)
         ind += 1
  
-    if(cnt  == 1000 and not m.bossFight):
+    if(cnt  == 3000 and not m.bossFight):
         tempMag = Magnet(d)
         objList.append(tempMag)
         ind += 1
     
-    if(cnt == 100):
+    if(cnt == 1000):
         bo = Boss(d,m)
         m.bossFight = 1
         objList.append(bo)
@@ -153,7 +153,7 @@ while(True):
         j.changeX(j.getX()+j.getXVel(), d)
         ind = j.removeObj(objList, ind, d)
 
-        if(m.boostOn and (j.objType != "bullet" and j.objType != "boost")):
+        if(m.boostOn and (j.objType != "bullet" and j.objType != "boost" and j.objType != "boss")):
             j.changeXVel(j.getXVel()-1)
 
     for j in objList:
@@ -168,12 +168,12 @@ while(True):
         j.printObject(d)
     
     if(m.bossFight):
-        if(cnt % 20 == 0):
+        if(cnt % 50 == 0):
             tempBullet = bossBullet(d,ind)
             objList.append(tempBullet)
             ind += 1
 
-            tempBullet.createBullet(bo.getX(),bo.getY(),bo)
+            tempBullet.createBullet(bo.getX(),bo.getY(),m)
 
         bo.changeY(m.getY(),d)
 

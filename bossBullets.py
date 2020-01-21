@@ -20,9 +20,9 @@ class bossBullet(gameObj):
         self.index = index 
         self.objType = "bossBullet"
     
-    def createBullet(self,x,y,bo):
+    def createBullet(self,x,y,m):
         self.x = x-1
-        self.y = y+int(bo.height/2)+2 
+        self.y = m.y
         self.vel[0] = -3
     
     def checkCollision(self,objList,m,ind):
