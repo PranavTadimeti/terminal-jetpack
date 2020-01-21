@@ -18,6 +18,7 @@ from magnet import *
 from speedBoost import *
 from boss import *
 from bossBullets import *
+from babyYoda import *
 
 r, c = os.popen('stty size', 'r').read().split()
 r = int(r)-3
@@ -37,6 +38,8 @@ flag = 0
 shield = 0
 mag = 0
 speedCnt = 0
+m.regularGame = 1
+yodaMade = 0
 
 # game loop
 while(True):
@@ -44,15 +47,17 @@ while(True):
     y = m.getY()
     x = m.getX()
 
-    d.createScreen(m.bossFight)
+    print("SCORE: ",m.score,"\tLIVES: ",m.lives)
 
-    if(cnt % 60 == 0 and not m.bossFight):
+    d.createScreen(m.regularGame)
+
+    if(cnt % 60 == 0 and m.regularGame):
         t = Beams(d, ind)
         objList.append(t)
         t.pickType()
         ind += 1
 
-    if(cnt % 100 == 0 and not m.bossFight):
+    if(cnt % 100 == 0 and m.regularGame):
 
         for i in range(6):
             objList.append(Coin(d, ind))
@@ -64,19 +69,19 @@ while(True):
                 objList[j].changeX(objList[ind-6].getX()+(j-ind+6), d)
                 objList[j].changeY(objList[ind-6].getY(), d)
 
-    if(cnt % 2000 == 0 and not m.bossFight):
+    if(cnt % 2000 == 0 and m.regularGame):
         sp = Boost(d, ind)
         objList.append(sp)
         ind += 1
  
-    if(cnt  == 3000 and not m.bossFight):
+    if(cnt  == 3000 and m.regularGame):
         tempMag = Magnet(d)
         objList.append(tempMag)
         ind += 1
     
-    if(cnt == 1000):
+    if(cnt == 100):
         bo = Boss(d,m)
-        m.bossFight = 1
+        m.regularGame = 0
         objList.append(bo)
         ind += 1
 
@@ -141,8 +146,8 @@ while(True):
 
     if(m.getYVel() > 1):
         m.changeYVel(1)
-    elif(m.getYVel() < -1):
-        m.changeYVel(-1)
+    elif(m.getYVel() < -1.5):
+        m.changeYVel(-1.5)
 
     if(m.boostCnt < 200):
         m.boostCnt += 1
@@ -167,7 +172,7 @@ while(True):
     for j in objList:
         j.printObject(d)
     
-    if(m.bossFight):
+    if(m.regularGame == 0 and bo.lives > 0):
         if(cnt % 50 == 0):
             tempBullet = bossBullet(d,ind)
             objList.append(tempBullet)
@@ -177,13 +182,19 @@ while(True):
 
         bo.changeY(m.getY(),d)
 
-        if(bo.lives == 0):
-            m.bossFight = 0
-            break
+    elif(m.regularGame == 0 and bo.lives == 0 and not yodaMade):
+        yoda = babyYoda(d,ind)
+        objList.append(yoda)
+        ind += 1
+        yodaMade = 1
+            
 
     m.changeY(m.getY()+int(m.getYVel()), d)
 
     ind = m.checkCollision(objList, ind)
+
+    if(m.done):
+        break
 
     m.checkAlive()
 
@@ -194,5 +205,7 @@ while(True):
 
     time.sleep(0.018)
 
-print(Back.BLACK)
-print("YOU WIN!!!")
+os.system('clear')
+
+print("Won, you have")
+

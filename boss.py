@@ -62,7 +62,3 @@ class Boss(gameObj):
         self.objType = "boss"
 
         self.lives = 10
-
-'''d=0
-m=0
-b = Boss(d,m)'''

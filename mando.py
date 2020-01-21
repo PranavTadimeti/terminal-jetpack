@@ -3,7 +3,6 @@ from colorama import *
 import numpy as np
 from gameObject import *
 
-
 class Mando(gameObj):
     def __init__(self):
 
@@ -21,8 +20,9 @@ class Mando(gameObj):
         self.score = 0
         self.boostOn = 0
         self.boostCnt = 0
-        self.bossFight = 0
-    
+        self.regularGame = 0
+        self.done = 0
+
     def checkCollision(self,objList,ind):
 
         for o in objList:
@@ -42,8 +42,11 @@ class Mando(gameObj):
             if(s1.intersection(r2) and s2.intersection(r4)):
                 objList.remove(o)
                 ind -= 1
+                
+                if(o.objType == "yoda"):
+                    self.done = 1
 
-                if(o.objType == "beam"):
+                elif(o.objType == "beam"):
                     self.lives -= 1
                 
                 elif(o.objType == "coin"):

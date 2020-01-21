@@ -9,12 +9,12 @@ class bossBullet(gameObj):
 
         super().__init__()
 
-        self.img = np.full((3,3),Back.WHITE+" ")
+        self.img = np.full((2,3),Back.WHITE+" ")
         self.s = s
         self.x = 0
         self.y = 0
         self.width = 3
-        self.height = 3
+        self.height = 2
         self.vel = np.array([0, 0],dtype='float64')
         self.acc = np.array([0, 0],dtype='float64')
         self.index = index 
