@@ -87,7 +87,7 @@ while(True):
         objList.append(tempMag)
         ind += 1
     
-    if(cnt == 30):
+    if(cnt == 1500):
         os.system('clear')
         bo = Boss(d,m)
         m.setGame(0)
