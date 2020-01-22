@@ -27,21 +27,28 @@ class Mando(gameObj):
 
     def checkCollision(self,objList,ind):
 
+        r1 = range(self._x,self._x+self._width+1)
+        r3 = range(self._y,self._y+self._height+1)
+
+        s1 = set(r1)
+        s3 = set(r3)
+
+
         for o in objList:
             
             if(o.getObjType() == "magnet"):
                 continue
-
-            r1 = range(self._x,self._x+self._width+1)
+            
             r2 = range(o.getX(),o.getX()+o.getWidth()+1)
-
-            r3 = range(self._y,self._y+self._height+1)
             r4 = range(o.getY(),o.getY()+o.getHeight()+1)
 
-            s1 = set(r1)
-            s2 = set(r3)
+            s2 = set(r2)
+            s4 = set(r4)
 
-            if(s1.intersection(r2) and s2.intersection(r4)):
+            a1 = list(s1.intersection(s2))
+            a2 = list(s3.intersection(s4))
+
+            if(len(a1) and len(a2)):
                 objList.remove(o)
                 ind -= 1
 
@@ -52,7 +59,7 @@ class Mando(gameObj):
                     self._lives -= 1
                 
                 elif(o.getObjType() == "coin"):
-                    self._score += 50
+                    self._score += 10
                 
                 elif(o.getObjType() == "boost"):
                     self._boostOn = 1
@@ -63,7 +70,7 @@ class Mando(gameObj):
     def checkAlive(self):
         if(self._lives == 0):
             print(self._score)
-            sys.exit(0)
+            return 1
 
     def shieldActivate(self,on,curr_lives):
         if(on):
@@ -86,7 +93,7 @@ class Mando(gameObj):
         self._lives = new_lives
     
     def getScore(self):
-        return self._lives
+        return self._score
     
     def setScore(self,new_score):
         self._score = new_score

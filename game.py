@@ -20,6 +20,8 @@ from boss import *
 from bossBullets import *
 from babyYoda import *
 
+os.system('clear')
+
 r, c = os.popen('stty size', 'r').read().split()
 r = int(r)-3
 c = int(c)
@@ -40,9 +42,16 @@ mag = 0
 speedCnt = 0
 m.setGame(1)
 yodaMade = 0
+curr_lives = 0
+lost = 0
 
+gameTime = 150
+startTime = time.time()
 # game loop
+
 while(True):
+
+    timeLeft =  gameTime - (time.time() - startTime)
 
     y = m.getY()
     x = m.getX()
@@ -156,8 +165,8 @@ while(True):
         j.changeX(j.getX()+j.getXVel(), d)
         ind = j.removeObj(objList, ind, d)
 
-        if(m.getBoostOn() and (j.getObjType() != "bullet" and j.getObjType() != "boost" and j.getObjType() != "boss")):
-            j.changeXVel(j.getXVel()-1)
+        if(m.getBoostOn() and (j.getObjType() != "bullet" and j.getObjType() != "boost" and j.getObjType() != "boss" and j.getObjType() != "yoda")):
+            j.changeXVel(-2)
 
     for j in objList:
 
@@ -171,7 +180,7 @@ while(True):
         d.renderObject(j)
     
     if(m.getGame() == 0 and bo.getLives() > 0):
-        if(cnt % 50 == 0):
+        if(cnt % 40 == 0):
             tempBullet = bossBullet(d,ind)
             objList.append(tempBullet)
             ind += 1
@@ -194,17 +203,33 @@ while(True):
     if(m.getDone()):
         break
 
-    m.checkAlive()
+    lost = m.checkAlive()
 
     d.renderObject(m)
     d.printScreen()
 
     cnt += 1
 
-    print(Back.BLACK+"SCORE: ",m.getScore(),Back.BLACK+"\tLIVES: ",m.getLives())
+    if(shield != 1):
+        curr_lives = m.getLives()
+    
+    print(Back.BLACK+"SCORE: ",m.getScore(),Back.BLACK+"\tLIVES: ",curr_lives,"\tTIME: ",int(timeLeft))
+
+    if(timeLeft <= 0):
+        lost = 1
+    
+    if(lost):
+        break
 
     time.sleep(0.018)
 
 os.system('clear')
+
+if(lost):
+    print("Lost, you have")
+else:
+    print("Won, you have")
+
+print("Your score is:  ",m.getScore())
 
 
