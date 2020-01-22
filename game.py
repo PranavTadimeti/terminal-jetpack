@@ -47,9 +47,6 @@ while(True):
     y = m.getY()
     x = m.getX()
 
-    # print("SCORE: ",m.getScore(),"\tLIVES: ",m.getLives())
-    print(y,x)
-
     d.createScreen(m.getGame())
 
     if(cnt % 60 == 0 and m.getGame()):
@@ -75,12 +72,12 @@ while(True):
         objList.append(sp)
         ind += 1
  
-    if(cnt  == 100 and m.getGame()):
+    if(cnt  == 1000  and m.getGame()):
         tempMag = Magnet(d)
         objList.append(tempMag)
         ind += 1
     
-    if(cnt == 1000):
+    if(cnt == 3000):
         bo = Boss(d,m)
         m.setGame(0)
         objList.append(bo)
@@ -204,9 +201,10 @@ while(True):
 
     cnt += 1
 
+    print(Back.BLACK+"SCORE: ",m.getScore(),Back.BLACK+"\tLIVES: ",m.getLives())
+
     time.sleep(0.018)
 
 os.system('clear')
 
-print("Won, you have")
 
