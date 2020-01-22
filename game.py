@@ -202,7 +202,7 @@ while(True):
 
     if(m.getDone()):
         break
-
+ 
     lost = m.checkAlive()
 
     d.renderObject(m)
