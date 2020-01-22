@@ -20,8 +20,6 @@ from boss import *
 from bossBullets import *
 from babyYoda import *
 
-os.system('clear')
-
 r, c = os.popen('stty size', 'r').read().split()
 r = int(r)-3
 c = int(c)
@@ -44,13 +42,16 @@ m.setGame(1)
 yodaMade = 0
 curr_lives = 0
 lost = 0
+c = 0
+dragAct = 0
 
-gameTime = 150
+gameTime = 120
 startTime = time.time()
 # game loop
 
 while(True):
 
+    c+= 0.05
     timeLeft =  gameTime - (time.time() - startTime)
 
     y = m.getY()
@@ -86,7 +87,8 @@ while(True):
         objList.append(tempMag)
         ind += 1
     
-    if(cnt == 3000):
+    if(cnt == 30):
+        os.system('clear')
         bo = Boss(d,m)
         m.setGame(0)
         objList.append(bo)
@@ -129,8 +131,11 @@ while(True):
             v = Bullet(d, ind)
             objList.append(v)
             ind += 1
-
             v.createBullet(m.getX()+3, m.getY()+1)
+        
+        elif(inp == 'k' and dragAct == 0):
+            m.setDragon(1)
+            dragAct = 1
 
         elif(inp == ' '):
             if(shield == 0):
@@ -179,6 +184,9 @@ while(True):
     for j in objList:
         d.renderObject(j)
     
+    if(m.getDragon() and dragAct):
+        d.createDragon(c,m.getX(),m.getY())
+    
     if(m.getGame() == 0 and bo.getLives() > 0):
         if(cnt % 40 == 0):
             tempBullet = bossBullet(d,ind)
@@ -190,6 +198,7 @@ while(True):
         bo.changeY(m.getY(),d)
 
     elif(m.getGame() == 0 and bo.getLives() == 0 and not yodaMade):
+        m.setScore(m.getScore()+1000)
         yoda = babyYoda(d,ind)
         objList.append(yoda)
         ind += 1
@@ -205,7 +214,9 @@ while(True):
  
     lost = m.checkAlive()
 
-    d.renderObject(m)
+    if(m.getDragon() == 0):
+        d.renderObject(m)
+    
     d.printScreen()
 
     cnt += 1
@@ -213,7 +224,7 @@ while(True):
     if(shield != 1):
         curr_lives = m.getLives()
     
-    print(Back.BLACK+"SCORE: ",m.getScore(),Back.BLACK+"\tLIVES: ",curr_lives,"\tTIME: ",int(timeLeft))
+    print(Back.BLACK+"SCORE: ",m.getScore(),Back.BLACK+"\tLIVES: ",curr_lives,"\tTIME: ",int(timeLeft)," ")
 
     if(timeLeft <= 0):
         lost = 1

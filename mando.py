@@ -1,7 +1,9 @@
+import math
 from screen import *
 from colorama import *
 import numpy as np
 from gameObject import *
+
 
 class Mando(gameObj):
     def __init__(self):
@@ -24,6 +26,7 @@ class Mando(gameObj):
         self._boostCnt = 0
         self._regularGame = 0
         self._done = 0
+        self._dragon = 0
 
     def checkCollision(self,objList,ind):
 
@@ -56,8 +59,12 @@ class Mando(gameObj):
                     self._done = 1
 
                 elif(o.getObjType() == "beam"):
-                    self._lives -= 1
-                
+                    
+                    if(self._dragon == 0):
+                        self._lives -= 1
+                    else:
+                        self._dragon = 0
+
                 elif(o.getObjType() == "coin"):
                     self._score += 10
                 
@@ -121,3 +128,9 @@ class Mando(gameObj):
     
     def setGame(self,new_game):
         self._regularGame = new_game
+    
+    def getDragon(self):
+        return self._dragon
+    
+    def setDragon(self,new_v):
+        self._dragon = new_v

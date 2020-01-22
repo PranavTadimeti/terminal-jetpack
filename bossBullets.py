@@ -43,7 +43,11 @@ class bossBullet(gameObj):
         a2 = s3.intersection(s4)
 
         if(len(a1) and len(a2)):
-            m.setLives(m.getLives()-1)
+            if(m.getDragon() == 0):
+                m.setLives(m.getLives()-1)
+            else:
+                m.setDragon(0)
+                
             objList.remove(self)
             ind -= 1
             return ind

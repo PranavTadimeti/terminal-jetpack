@@ -1,3 +1,4 @@
+import math
 from colorama import *
 import sys
 import numpy as np
@@ -42,3 +43,12 @@ class Screen:
             for j in range(obj.getWidth()):
                 self._display[obj.getY()+i, obj.getX()+j] = obj.sliceImg(i,j)
          
+    def createDragon(self,c,pos,ht):
+        
+        a = np.linspace(-math.pi/2,math.pi/2,pos)
+        f = (np.sin(a+math.pi*c)+1)*(ht/2)
+
+        cnt = 0
+        for i in f:
+            cnt += 1
+            self._display[int(i),cnt] = Back.WHITE+'O'

@@ -61,7 +61,7 @@ class Boss(gameObj):
 
         self._objType = "boss"
 
-        self._lives = 10
+        self._lives = 30
 
     def getLives(self):
         return self._lives
